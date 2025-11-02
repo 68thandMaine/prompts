@@ -1,0 +1,7 @@
+# Example .gitmodules configuration for sparse checkout of only context directory
+# Place this in the parent repository's .gitmodules file
+
+[submodule "core_prompts"]
+    path = .cursor/rules
+    url = https://github.com/yourusername/core_prompts.git
+    sparse-checkout = context/*

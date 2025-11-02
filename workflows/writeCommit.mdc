@@ -2,6 +2,7 @@
 description: Use this rule when asked to write a commit.
 alwaysApply: false
 ---
+
 # Cursor Rules for Commit Management
 
 ## Commit Rule
@@ -20,13 +21,15 @@ When handling commits, create concise conventional commit messages:
    - No commit body needed - keep it simple and focused
 
 3. **Update Agent Memory**
-   - 
+   - Record the commit details in agent context for future reference
+   - Note any follow-up tasks or related work identified during commit process
 
 4. **Validate and Push**
    - Ensure commit follows conventional format
    - Push commits to remote repository
 
 ### Example Commit Messages:
+
 - `feat(JUNO-148): add user authentication system`
 - `fix(JUNO-148): resolve null pointer in payment processing`
 - `refactor(JUNO-148): optimize database query performance`
