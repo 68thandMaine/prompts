@@ -1,0 +1,46 @@
+---
+description: Use this rule to create a pull request.
+alwaysApply: false
+---
+# Cursor Rules for Opening a Pull Request
+
+## Prerequisites
+
+- In order to use this rule you (the ai agent) must have access to MCP tooling
+that can connect to Github. If you do not have access to MCP tooling that can 
+connect to Github, or the MCP server is down then inform the user and do not
+execute this rule.
+- In order to use this rule you (the ai agent) must have access to MCP tooling
+that can connect to an Atlassian MCP Server. If you do not have access to MCP
+tooling that can connect to an Atlassian MCP Server, or the MCP server is down 
+then inform the user and do not execute this rule.
+
+## Pull Request Template
+
+```markdown
+# Summary
+
+Two paragraphs that summarize the body of work accomplished in the PR.
+
+# Expected Outcome
+
+One paragraph that summarizes what the goal of the PR is. What does the change
+accomplish.
+
+# Acceptance Criteria
+
+Bulleted list of things that need to be done in order for the PR to be approved.
+```
+
+## Steps
+
+1. Ensure there are no changes that need to added to the git history
+  - Use `git status`
+2. If there are then run the writeCommit.mdc rule
+  - Search for the writeCommit.mdc file and read it and follow it's instructions
+3. Get the ticket details to understand the scope of the body of work.
+  - Use MCP 
+4. Get the diff of the current branch against the `dev` branch
+5. Determine how the diff changes satisfy the ticket details
+6. Write a pull request using the pull request template
+7. Use the github pull request MCP tool to open the pull request
