@@ -40,3 +40,5 @@ When handling commits, create concise conventional commit messages:
 - Keep commits simple, focused, and follow conventional commit standards.
 
 - When multiple files have been changed, analyze the changed files and review the conversation history to group them logically by related work. Create a separate commit message for each logical group - if there are three groups of related changes, create three separate commits.
+
+- Only write the type, scope, and description. There should never be a body for the commits you generate.
