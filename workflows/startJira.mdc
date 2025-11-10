@@ -1,0 +1,18 @@
+---
+alwaysApply: true
+---
+
+# Cursor Rules for Starting Work on a Jira Ticket
+
+## Prerequisites
+
+<!-- - In order to use this rule you (the ai agent) must have access to MCP tooling
+  that can connect to Github. If you do not have access to MCP tooling that can
+  connect to Github, or the MCP server is down then inform the user and do not
+  execute this rule. -->
+- In order to use this rule you (the ai agent) must have access to MCP tooling
+  that can connect to an Atlassian MCP Server. If you do not have access to MCP
+  tooling that can connect to an Atlassian MCP Server, or the MCP server is down
+  then inform the user and do not execute this rule.
+
+  

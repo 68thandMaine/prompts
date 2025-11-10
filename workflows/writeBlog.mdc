@@ -1,0 +1,139 @@
+---
+description: Use this rule when asked to write a blog post in a Docusaurus project.
+alwaysApply: false
+---
+
+# Cursor Rules for Writing Blog Posts
+
+## Blog Post Creation Rule
+
+When asked to write a blog post about a conversation session's problem-solving process, follow these steps:
+
+1. **Check Project Structure**
+   - Verify that a `docs/` directory exists in the project root
+   - Check if Docusaurus is configured in the project (look for `docusaurus.config.js`, `docusaurus.config.ts`, or similar configuration files)
+
+2. **Create Blog Post Structure**
+   - If both conditions are met, create a new blog post in `docs/blog/`
+   - Use the standard Docusaurus blog post format with frontmatter
+
+3. **Blog Post Format**
+   - File naming: Use date-based naming (e.g., `2023-01-01-debugging-session-deep-dive.md` or `2023-01-01-debugging-session-deep-dive.mdx`)
+   - Include proper frontmatter with:
+     - title
+     - date (current date)
+     - description
+     - authors (choose from authors.yml: your-name, cursor-agent, or ai_collaborative)
+     - tags (recommended: debugging, problem-solving, technical-deep-dive, troubleshooting)
+
+4. **Content Structure - Answer These Key Questions**
+   - **The Problem**: What was the issue that needed to be solved?
+   - **Root Cause Analysis**: Why did this problem occur?
+   - **Hypothesized Solutions**: What potential solutions were considered?
+   - **The Solution**: What was the final solution that worked?
+   - **Why It Worked**: What made this solution effective?
+   - **Implementation Details**: How was the solution implemented?
+
+5. **Content Guidelines**
+   - Structure the post around the key questions above
+   - Include code snippets, error messages, and technical details
+   - Document the thought process and reasoning
+   - Use appropriate markdown formatting
+   - Make it educational and shareable
+
+6. **Validation**
+   - Verify the blog post can be built successfully
+   - Check for any linting or formatting issues
+   - Ensure proper file placement and naming
+   - Confirm all technical details are accurate
+
+## Example Blog Post Structure:
+
+```markdown
+---
+title: Debugging Deep Dive: Resolving Memory Leak in React Component
+date: 2023-01-01
+description: A technical deep dive into diagnosing and fixing a memory leak in a React component during a debugging session
+authors: ai_collaborative
+tags: [debugging, react, memory-leak, problem-solving, technical-deep-dive]
+---
+
+# Debugging Deep Dive: Resolving Memory Leak in React Component
+
+## The Problem
+
+During a recent development session, we encountered a memory leak in a React component that was causing the application to consume increasingly more memory over time, eventually leading to performance degradation and crashes.
+
+## Root Cause Analysis
+
+The memory leak was occurring because event listeners were being added to DOM elements in the `useEffect` hook but never properly cleaned up when the component unmounted or when dependencies changed.
+
+## Hypothesized Solutions
+
+Several potential solutions were considered:
+
+1. **Manual cleanup in useEffect**: Adding cleanup functions to remove event listeners
+2. **useCallback optimization**: Memoizing event handlers to prevent unnecessary re-renders
+3. **Ref-based approach**: Using refs instead of state for DOM manipulation
+4. **Component restructuring**: Breaking down the component into smaller, more focused pieces
+
+## The Solution
+
+The final solution involved implementing proper cleanup in the `useEffect` hook by returning a cleanup function that removes all event listeners.
+
+## Why It Worked
+
+This solution worked because:
+- It ensures event listeners are properly removed when the component unmounts
+- It prevents memory leaks by cleaning up resources
+- It follows React best practices for effect cleanup
+- It maintains the component's functionality while fixing the performance issue
+
+## Implementation Details
+
+```jsx
+const MyComponent = () => {
+  useEffect(() => {
+    const handleResize = () => {
+      // Handle resize logic
+    };
+
+    const handleScroll = () => {
+      // Handle scroll logic
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup function removes event listeners
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); // Empty dependency array for mount/unmount only
+
+  return (
+    // Component JSX
+  );
+};
+```
+
+## Key Takeaways
+
+- Always implement cleanup functions in useEffect hooks that add event listeners
+- Memory leaks can cause subtle performance issues that compound over time
+- Following React best practices prevents many common issues
+- Proper debugging involves systematic elimination of potential causes
+```
+
+## Tips
+
+- **Choose appropriate authorship**: Use 'your-name' for personal credit, 'cursor-agent' if AI-generated, or 'ai_collaborative' for human-AI partnership
+- Structure the post around the key questions (Problem, Why, Solutions, Implementation)
+- Include specific error messages, code snippets, and technical details
+- Document the thought process and debugging steps taken
+- Use descriptive titles that clearly indicate the technical issue and resolution
+- Include relevant tags like debugging, problem-solving, and specific technologies
+- Make the post educational - others should learn from your debugging process
+- Reference specific files, functions, or components involved in the issue
+- Include before/after code comparisons when possible

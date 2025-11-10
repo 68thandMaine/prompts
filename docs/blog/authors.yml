@@ -1,0 +1,16 @@
+your-name:
+  name: Your Name
+  title: Developer
+  url: https://your-website.com
+  image_url: https://github.com/your-username.png
+
+cursor-agent:
+  name: Cursor AI Agent
+  title: AI Assistant
+  url: https://cursor.sh
+  image_url: https://avatars.githubusercontent.com/u/61779650?s=200&v=4
+
+ai_collaborative:
+  name: Your Name & Cursor AI
+  title: Human-AI Collaboration
+  url: https://your-website.com

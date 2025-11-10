@@ -18,10 +18,10 @@ To add this repository as a submodule in your existing project:
 
 ```bash
 # Add the submodule to your project's .cursor/rules directory
-git submodule add https://github.com/yourusername/core_prompts.git .cursor/rules
+git submodule add https://github.com/yourusername/prompts.git .cursor/rules
 
 # Or add it to a different location
-git submodule add https://github.com/yourusername/core_prompts.git core_prompts
+git submodule add https://github.com/yourusername/prompts.git prompts
 ```
 
 ### Sparse Checkout (Context Only)
@@ -30,7 +30,7 @@ If you only want to install the context files (recommended for minimal setup):
 
 ```bash
 # Add the submodule
-git submodule add https://github.com/yourusername/core_prompts.git .cursor/rules
+git submodule add https://github.com/68thandMaine/prompts.git .cursor/rules
 
 # Configure sparse checkout to only get context files
 cd .cursor/rules
@@ -40,7 +40,7 @@ git checkout
 
 # Or use the provided setup script (after cloning)
 # Download and run the setup script
-curl -fsSL https://raw.githubusercontent.com/yourusername/core_prompts/main/setup-sparse-checkout.sh | bash -s .cursor/rules
+curl -fsSL https://raw.githubusercontent.com/68thandmaine/prompts/main/setup-sparse-checkout.sh | bash -s .cursor/rules
 ```
 
 This will only checkout the `context/` directory containing the essential AI agent prompts.
