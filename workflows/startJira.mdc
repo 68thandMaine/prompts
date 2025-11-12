@@ -6,13 +6,18 @@ alwaysApply: true
 
 ## Prerequisites
 
-<!-- - In order to use this rule you (the ai agent) must have access to MCP tooling
-  that can connect to Github. If you do not have access to MCP tooling that can
-  connect to Github, or the MCP server is down then inform the user and do not
-  execute this rule. -->
 - In order to use this rule you (the ai agent) must have access to MCP tooling
   that can connect to an Atlassian MCP Server. If you do not have access to MCP
   tooling that can connect to an Atlassian MCP Server, or the MCP server is down
   then inform the user and do not execute this rule.
+
+## Steps
+
+1. Ask a user what ticket to look into
+2. When you receive user input use the MCP tools to get the ticket information
+3. Create a new branch named after the ticket number and a brief, one sentence
+description. For example: ULLR-86-test-this-or-that
+4. Chain of thought analysis of what would be required to solve the ticket. 
+5. Solve the ticket.
 
   
