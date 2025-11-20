@@ -1,44 +1,112 @@
----
-description: Use this rule when asked to write a commit.
-alwaysApply: false
----
+# Commit Convention
 
-# Cursor Rules for Commit Management
+**Format:** `<type>[optional scope]: <description>`
 
-## Commit Rule
+**No body section allowed** - keep description under 80 characters and capture full context in subject line.
 
-When handling commits, create concise conventional commit messages:
+## Agent Behavior
 
-1. **Use Conventional Commit Format**
-   - Format: `<type>(<scope>): <description>`
-   - Common types: feat, fix, docs, style, refactor, test, chore
-   - Use Jira ticket number (or branch name if no ticket) as the scope
-   - Keep description concise and under 72 characters
+**When to Write Commits:**
+- When the user explicitly asks to "write the commit"
 
-2. **Simple Commit Creation**
-   - Stage relevant files: `git add <files>`
-   - Create commit with header only: `git commit -m "type(scope): description"`
-   - No commit body needed - keep it simple and focused
+**Process:**
+1. Stage all changes: `git add .`
+2. Write commit message following this format
+3. Execute: `git commit -m "message"`
 
-3. **Update Agent Memory**
-   - Record the commit details in agent context for future reference
-   - Note any follow-up tasks or related work identified during commit process
+## Types
 
-4. **Validate and Push**
-   - Ensure commit follows conventional format
-   - Push commits to remote repository
+| Type | When to Use | Example |
+|------|-------------|---------|
+| `feat` | New feature | `feat: add dark mode toggle` |
+| `fix` | Bug fix | `fix: resolve memory leak in weather API` |
+| `docs` | Documentation changes | `docs: update README with new API endpoints` |
+| `style` | Code style/formatting changes | `style: fix indentation in config files` |
+| `refactor` | Code restructuring | `refactor: extract weather validation logic` |
+| `perf` | Performance improvements | `perf: optimize database queries` |
+| `test` | Test additions/modifications | `test: add unit tests for geocoding service` |
+| `chore` | Build/CI/tooling changes | `chore: update dependencies` |
+| `ci` | CI configuration changes | `ci: add automated deployment pipeline` |
+| `revert` | Commit reversions | `revert: undo broken authentication changes` |
 
-### Example Commit Messages:
+## Rules
 
-- `feat(JUNO-148): add user authentication system`
-- `fix(JUNO-148): resolve null pointer in payment processing`
-- `refactor(JUNO-148): optimize database query performance`
-- `docs(JUNO-148): update API documentation for new endpoints`
+- **Scope:** Use JIRA ticket format `(ULLR-XXX)`
+- **Description:** Imperative mood, lowercase, no period, ≤50 chars
+- **Examples:**
+  - ✅ `feat(ULLR-29): add user authentication`
+  - ✅ `fix(api): handle null weather responses`
+  - ❌ `feat: Added new feature.`
+  - ❌ `fixed bug` (no type/scope)
 
-## Tips
+## Key Guidelines
 
-- Keep commits simple, focused, and follow conventional commit standards.
+- Keep commits atomic (single logical change)
+- Write as if completing: "If applied, this commit will..."
+- Use present tense ("add" not "added")
+- Include JIRA ticket in scope when applicable
+- Break large changes into smaller commits if needed
 
-- When multiple files have been changed, analyze the changed files and review the conversation history to group them logically by related work. Create a separate commit message for each logical group - if there are three groups of related changes, create three separate commits.
+## Quick Reference
 
-- Only write the type, scope, and description. There should never be a body for the commits you generate.
+**Format:** `<type>[optional scope]: <description>`
+
+**Example:** `feat(ULLR-29): add user authentication`
+
+## Step-by-Step Guide
+
+### 1. Choose Commit Type
+Pick ONE type that best describes your change from the table above.
+
+### 2. Add Scope
+**Format:** `(TICKET-123)` where TICKET-123 is your JIRA ticket number
+- `feat(ULLR-29): add user authentication` ✅
+
+### 3. Write Description
+**Rules:**
+- Use **imperative mood** (present tense)
+- Start with lowercase letter
+- No period at the end
+- Keep under 50 characters when possible
+- Be specific about what the commit accomplishes
+
+**Good Examples:**
+- `add user authentication` ✅
+- `fix memory leak in weather API` ✅
+- `update README with new endpoints` ✅
+
+**Bad Examples:**
+- `Added new feature.` ❌ (past tense + period)
+- `fixed bug` ❌ (too vague)
+- `This commit adds a new feature that allows users to authenticate using their credentials` ❌ (too long)
+
+### 4. Validation Checklist
+Before committing, ask yourself:
+
+1. **Single Purpose?** - Does this commit do only ONE thing?
+2. **Type Correct?** - Did I pick the right type from the table above?
+3. **Scope Added?** - Did I include the Jira as `(TICKET-123)`?
+4. **Description Clear?** - Can someone understand what changed without reading the code?
+5. **Format Correct?** - Does it follow: `<type>[scope]: <description>`?
+
+## Common Patterns
+
+```
+feat(ULLR-29): add user authentication
+fix(api): handle null weather responses
+```
+
+## Complete Workflow
+
+When the user says "write the commit" or when you detect significant changes:
+
+1. **Check git status** to see what files have been modified
+2. **Review changes** by reading key modified files to understand the scope
+3. **Stage changes**: `git add .`
+4. **Determine commit type** based on the nature of changes:
+5. **Add scope** using JIRA ticket format `(ULLR-XXX)` when applicable
+6. **Write description** in imperative mood, lowercase, no period
+7. **Commit**: `git commit -m "type(scope): description"`
+8. **Update current step**: Run the `@update-current-step.mdc` workflow. This
+is the most important step. you must update the current step file located in
+the memory-bank after writing commits.
