@@ -1,0 +1,124 @@
+---
+alwaysApply: true
+---
+
+# No Magic Values
+
+**Never use magic numbers or strings directly in code.** All values must be extracted to the `constants/` directory and imported as named constants.
+
+## Magic Numbers & Strings to Avoid
+
+**Never use hardcoded values directly in code.** Instead, extract them to well-named constants.
+
+### ❌ Bad Examples:
+```javascript
+// Magic numbers
+if (user.age > 18) { /* ... */ }
+setTimeout(callback, 5000);
+
+// Magic strings
+if (status === "active") { /* ... */ }
+const apiUrl = "https://api.example.com/v1";
+```
+
+### ✅ Good Examples:
+```javascript
+// Define constants first
+const ADULT_AGE = 18;
+const DEBOUNCE_DELAY = 5000;
+const USER_STATUS_ACTIVE = "active";
+const API_BASE_URL = "https://api.example.com/v1";
+
+// Use constants in code
+if (user.age > ADULT_AGE) { /* ... */ }
+setTimeout(callback, DEBOUNCE_DELAY);
+if (status === USER_STATUS_ACTIVE) { /* ... */ }
+const apiUrl = API_BASE_URL;
+```
+
+## When to Create Constants
+
+**Create constants for any value that:**
+- Has semantic meaning beyond its literal value
+- Appears in multiple places
+- Might need to change in the future
+- Represents business logic or configuration
+- Is used in comparisons, calculations, or as thresholds
+
+### Examples of Values That Should Be Constants:
+- Age thresholds (18, 21, 65)
+- Time intervals (1000ms, 5000ms, 1 hour)
+- Status strings ("active", "inactive", "pending")
+- API endpoints and URLs
+- File paths and directories
+- Database limits and sizes
+- Mathematical constants (PI, E, conversion factors)
+- Error codes and status codes
+- Feature flags and configuration values
+
+## Naming Conventions
+
+**Use descriptive, UPPER_SNAKE_CASE names:**
+- `MAX_RETRY_ATTEMPTS` (not `MAX_RETRIES` or `RETRY_MAX`)
+- `DEFAULT_TIMEOUT_MS` (not `TIMEOUT`)
+- `USER_STATUS_INACTIVE` (not `INACTIVE_STATUS`)
+
+**Include units in names when helpful:**
+- `SESSION_TIMEOUT_MINUTES` (not `SESSION_TIMEOUT`)
+- `CACHE_SIZE_MB` (not `CACHE_SIZE`)
+
+## Implementation Guidelines
+
+**Define constants at the appropriate scope:**
+- **Global constants**: Module/file level for widely used values
+- **Class constants**: Static properties for class-specific values
+- **Local constants**: Within functions for scoped values
+
+**Group related constants:**
+```javascript
+// Good: Group related constants
+const USER_AGE = {
+  MINOR: 0,
+  ADULT: 18,
+  SENIOR: 65
+};
+
+const API_ENDPOINTS = {
+  USERS: "/api/users",
+  POSTS: "/api/posts",
+  COMMENTS: "/api/comments"
+};
+```
+
+**Document constants when purpose isn't obvious:**
+```javascript
+// Good: Add comments for complex constants
+const JWT_EXPIRY_HOURS = 24; // Standard session length
+const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB limit for uploads
+```
+
+## Code Review Checklist
+
+**When reviewing code, ensure:**
+- [ ] No unexplained numbers (except 0, 1, -1 in simple cases)
+- [ ] No hardcoded strings used in business logic
+- [ ] Constants are defined before use
+- [ ] Constant names are descriptive and follow conventions
+- [ ] Related constants are grouped together
+- [ ] Constants include appropriate units/suffixes
+
+## Exceptions
+
+**Acceptable uses of "magic" values:**
+- Simple loop counters: `for (let i = 0; i < 10; i++)`
+- Basic arithmetic: `total = price * 1.08` (but consider `TAX_RATE = 0.08`)
+- Unit conversions within the same expression
+- Well-known universal constants (but still define them)
+
+## Benefits
+
+- **Readability**: Code reads like documentation
+- **Maintainability**: Single place to update values
+- **Debugging**: Easier to spot incorrect values
+- **Testing**: Constants can be easily mocked or overridden
+- **Refactoring**: IDE support for finding all usages

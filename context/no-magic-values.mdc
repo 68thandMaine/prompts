@@ -1,0 +1,102 @@
+---
+alwaysApply: true
+---
+
+# No Magic Values
+
+**Never use magic numbers or strings directly in code.** All values must be extracted to the `constants/` directory and imported as named constants.
+
+## Magic Values to Avoid
+
+**Never use hardcoded values directly in code.** Extract all magic numbers and strings to the `constants/` directory.
+
+### ❌ Bad Examples:
+```javascript
+// Magic numbers
+if (user.age > 18) { /* ... */ }
+setTimeout(callback, 5000);
+
+// Magic strings
+if (status === "active") { /* ... */ }
+fetch("https://api.example.com/v1/users");
+```
+
+### ✅ Good Examples:
+```javascript
+import { USER_AGE, TIMEOUTS, USER_STATUS } from '../constants';
+import { API_ENDPOINTS } from '../constants/routes';
+
+// Use existing constants
+if (user.age > USER_AGE.ADULT) { /* ... */ }
+setTimeout(callback, TIMEOUTS.DEBOUNCE);
+if (status === USER_STATUS.ACTIVE) { /* ... */ }
+fetch(API_ENDPOINTS.USERS);
+```
+
+## When to Extract Constants
+
+**Extract to constants any value that:**
+- Appears in multiple places
+- Has semantic meaning beyond its literal value
+- Might need to change in the future
+- Represents business logic or configuration
+
+### Values That Must Be Constants:
+- Age thresholds, time intervals, limits
+- Status strings, error messages, labels
+- API endpoints, URLs, file paths
+- Database queries, table names, column names
+- Feature flags, configuration values
+- Weather codes, snow conditions, any domain-specific values
+
+## How to Add New Constants
+
+**1. Find the appropriate constants file in `constants/` directory:**
+- `constants/errors.js` - Error messages and codes
+- `constants/http_status.js` - HTTP status codes
+- `constants/database.js` - Database-related values
+- `constants/snow.js` - Snow/weather conditions
+- `constants/weather.js` - Weather data constants
+- `constants/routes.js` - API endpoints and URLs
+
+**2. Add your constant using existing naming patterns:**
+```javascript
+// In constants/routes.js
+export const API_ENDPOINTS = {
+  USERS: '/api/users',
+  WEATHER: '/api/weather',
+  // Add your new endpoint here
+  NEW_ENDPOINT: '/api/new-feature'
+};
+```
+
+**3. Import and use the constant:**
+```javascript
+import { API_ENDPOINTS } from '../constants/routes';
+fetch(API_ENDPOINTS.NEW_ENDPOINT);
+```
+
+## Code Review Checklist
+
+**When reviewing code, ensure:**
+- [ ] No magic numbers > 1 (except loop counters 0, 1, 2)
+- [ ] No hardcoded strings in business logic
+- [ ] All constants imported from `constants/` directory
+- [ ] Constants follow existing naming patterns
+- [ ] New constants added to appropriate constants file
+
+## Exceptions
+
+**Acceptable "magic" values:**
+- Loop counters: `for (let i = 0; i < array.length; i++)`
+- Array indices: `array[0]`, `array[1]`
+- Simple arithmetic: `x + 1`, `y * 2`
+- Well-known constants already in constants files
+
+## Benefits
+
+- **Readability**: Code reads like documentation
+- **Maintainability**: Single place to update values
+- **Debugging**: Easier to spot incorrect values
+- **Testing**: Constants can be easily mocked or overridden
+- **Refactoring**: IDE support for finding all usages

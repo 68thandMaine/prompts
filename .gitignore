@@ -114,3 +114,6 @@ dist/
 *.cursor/
 ai-*.tmp
 *.ai-backup
+
+# Experimental
+throwAways/
