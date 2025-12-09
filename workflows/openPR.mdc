@@ -1,20 +1,20 @@
 ---
-description: Use this rule to create a pull request.
+description: Use this workflow to create a pull request.
 alwaysApply: false
 ---
 
-# Cursor Rules for Opening a Pull Request
+# Cursor Workflow for Opening a Pull Request
 
 ## Prerequisites
 
-- In order to use this rule you (the ai agent) must have access to MCP tooling
+- In order to use this workflow you (the ai agent) must have access to MCP tooling
   that can connect to Github. If you do not have access to MCP tooling that can
   connect to Github, or the MCP server is down then inform the user and do not
-  execute this rule.
-- In order to use this rule you (the ai agent) must have access to MCP tooling
+  execute this workflow.
+- In order to use this workflow you (the ai agent) must have access to MCP tooling
   that can connect to an Atlassian MCP Server. If you do not have access to MCP
   tooling that can connect to an Atlassian MCP Server, or the MCP server is down
-  then inform the user and do not execute this rule.
+  then inform the user and do not execute this workflow.
 
 ## Pull Request Template
 
@@ -39,7 +39,7 @@ Bulleted list of things that need to be done in order for the PR to be approved.
 
 - Use `git status`
 
-2. If there are then run the writeCommit.mdc rule
+2. If there are then run the writeCommit.mdc workflow
 
 - Search for the writeCommit.mdc file and read it and follow it's instructions
 

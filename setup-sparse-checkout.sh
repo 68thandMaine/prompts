@@ -33,6 +33,9 @@ git config core.sparseCheckout true
 # Configure to only checkout context directory
 echo "context/*" > .git/info/sparse-checkout
 
+echo "personality/*" >> .git/info/sparse-checkout
+echo "workflows/*" >> .git/info/sparse-checkout
+
 # Checkout the sparse content
 git checkout
 

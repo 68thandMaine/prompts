@@ -1,0 +1,18 @@
+---
+description: Workflow to use to respond to pull request feedback.
+alwaysApply: false
+---
+
+# Workflow 
+
+1. Understand the conventional comment style by reading https://conventionalcomments.org/
+2. Find the pull request comments using the github mcp tools
+3. Make a todo list based off of the blocking comments.
+4. Solve each item.
+5. Resolve each comment if possible.
+
+# Tools to use
+
+github mcp server:
+
+pull_request_read

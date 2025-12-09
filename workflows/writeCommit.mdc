@@ -1,3 +1,8 @@
+---
+description: Use this rule when asked to write write a commit.
+alwaysApply: false
+---
+
 # Commit Convention
 
 **Format:** `<type>[optional scope]: <description>`
@@ -98,11 +103,11 @@ fix(api): handle null weather responses
 
 ## Complete Workflow
 
-When the user says "write the commit" or when you detect significant changes:
+When the user initiates this workflow:
 
 1. **Check git status** to see what files have been modified
 2. **Review changes** by reading key modified files to understand the scope
-3. **Stage changes**: `git add .`
+3. **Stage changes** in groups of logical file changes
 4. **Determine commit type** based on the nature of changes:
 5. **Add scope** using JIRA ticket format `(ULLR-XXX)` when applicable
 6. **Write description** in imperative mood, lowercase, no period

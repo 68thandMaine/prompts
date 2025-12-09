@@ -1,17 +1,20 @@
 ---
-alwaysApply: true
+alwaysApply: false
+description: Workflow to execute when a user activates this prompt
 ---
 
-# Cursor Rules for Starting Work on a Jira Ticket
+# Workflow for Starting Work on a Jira Ticket
 
 ## Prerequisites
 
-- In order to use this rule you (the ai agent) must have access to MCP tooling
+- In order to use this workflow you (the ai agent) must have access to MCP tooling
   that can connect to an Atlassian MCP Server. If you do not have access to MCP
   tooling that can connect to an Atlassian MCP Server, or the MCP server is down
   then inform the user and do not execute this rule.
 
 ## Steps
+
+Your task is to do the following:
 
 1. Ask a user what ticket to look into
 2. When you receive user input use the MCP tools to get the ticket information
