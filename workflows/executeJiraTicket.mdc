@@ -1,0 +1,72 @@
+---
+alwaysApply: false
+description: End-to-end Jira execution workflow (claim, plan, solve, document)
+---
+
+# Workflow: Execute a Jira Ticket End-to-End
+
+## Purpose
+
+Run a full Jira implementation loop from ticket intake through delivery and documentation.
+
+## Prerequisites
+
+- You (the agent) must have working MCP access to an Atlassian/Jira server.
+- If Jira MCP is unavailable, stop and clearly report the blocker to the user.
+
+## Inputs
+
+Collect or confirm the Jira key (for example `ULLR-237`) before execution.
+
+## Required Execution Steps
+
+1. **Identify and validate ticket**
+   - Ask for the Jira ticket key if missing.
+   - Read the ticket via Jira MCP.
+   - Confirm scope, acceptance criteria, dependencies, and linked issues.
+
+2. **Claim ownership and start work**
+   - Assign the ticket to the current authenticated Jira user.
+   - Transition status to `In Progress`.
+   - If either operation fails, report exact failure and stop.
+
+3. **Build an implementation plan**
+   - Produce a concise plan before code changes.
+   - Include: affected services, risks, test strategy, and rollback notes.
+   - Treat this repository as one microservice within a larger system.
+
+4. **Research unknowns before coding**
+   - Use available MCP tools and web search when concepts, APIs, or patterns are unfamiliar.
+   - Capture key findings that change implementation decisions.
+
+5. **Explore relevant code beyond immediate files**
+   - Search the larger directory tree for related contracts, shared libraries, and upstream/downstream integration points.
+   - Include nearby repositories or service boundaries when available in the workspace.
+
+6. **Implement and verify**
+   - Solve the ticket completely, not partially.
+   - Run appropriate tests/analysis for the touched layers.
+   - Ensure behavior matches ticket acceptance criteria.
+
+7. **Document interesting findings**
+   - Add short notes in the final response about useful discoveries, tradeoffs, and caveats.
+   - If a decision is non-obvious, document why it was chosen.
+
+8. **Long-struggle publishing rule**
+   - If the work required a long back-and-forth or notable debugging journey, create a blog draft describing:
+     - the problem,
+     - failed approaches,
+     - the final solution,
+     - lessons learned.
+   - Then explicitly evaluate whether any non-blog "hardcore" documentation should be updated (runbooks, architecture docs, ADRs, onboarding docs), and update when appropriate.
+
+## Completion Checklist
+
+- Jira ticket is assigned to current user.
+- Jira ticket is in `In Progress` (or later if completed in-session).
+- Plan was created and followed.
+- Unknown concepts were researched as needed.
+- Solution implemented and verified with tests.
+- Interesting findings documented.
+- Blog drafted when the struggle threshold was met.
+- Serious documentation update evaluated (and updated when needed).
