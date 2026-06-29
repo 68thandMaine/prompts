@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+# File Size Limits
+
+- Dart source files must stay under **300 lines** when practical; **500 lines** is a hard stop.
+- `build()` methods: under **30 lines** — extract child widgets.
+- Functions: under **50 lines** — extract helpers or services.
+- When a file approaches the limit, split by responsibility (not by arbitrary chunk size).

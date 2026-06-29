@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+# Navigation
+
+- **GoRouter only** — no `Navigator.pushNamed` / `pushReplacementNamed` for app routes.
+- Canonical routes live in `lib/src/core/constants/app_routes.dart`.
+- Use `context.go()` for top-level switches, `context.push()` for stacked flows.
+- Router instance must be memoized via `appRouterProvider` — never recreate in `App.build()`.

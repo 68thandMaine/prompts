@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+# Riverpod Patterns
+
+- Prefer `AsyncNotifier` / `Notifier` over `ChangeNotifier` or `StateNotifier` for new code.
+- Colocate providers with their feature (`lib/features/<feature>/providers/`).
+- Network clients: `lib/src/core/network/providers.dart`; barrel re-export from `injection_container.dart`.
+- Side-effect sync providers (token updaters, auth→prefs sync) stay small and listen via `ref.listen`.
+- Override providers in tests — never hit live APIs from unit/widget tests.

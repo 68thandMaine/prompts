@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+# Single Responsibility
+
+- One widget = one visual concern (form, list, header — not all three).
+- One provider = one feature state domain (auth, gear wardrobe, home weather).
+- One service = one API resource group (auth, gear, preferences).
+- Screens orchestrate; they should not contain large inline form/layout trees — extract to `widgets/`.

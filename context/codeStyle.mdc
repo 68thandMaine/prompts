@@ -1,3 +1,13 @@
 ---
 alwaysApply: true
 ---
+
+# Code Style (ULLR Mobile)
+
+- **Structure:** Feature-first under `lib/features/`; shared code in `lib/src/core/`.
+- **State:** Riverpod `AsyncNotifier` / `Notifier`; providers live with their feature.
+- **Navigation:** GoRouter only; routes in `app_routes.dart`; memoized via `appRouterProvider`.
+- **Constants:** All magic values in `lib/src/core/constants/` — never inline business strings/numbers.
+- **Imports:** Package imports only (`package:ullr_mobile/...`); group dart → package → project.
+- **Errors:** Use `lib/src/core/errors/` and feature-local `bootstrap_exceptions.dart`.
+- **Formatting:** `dart format -l 100`; files under 300 lines when possible.

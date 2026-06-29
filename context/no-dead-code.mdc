@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+# No Dead Code
+
+- No commented-out provider blocks, stub classes, or orphaned widgets.
+- Remove unused imports, exports, and dependencies when refactoring.
+- If code is "for later", track it in Jira/beads — do not leave it in the tree.
+- Delete scaffold files (e.g. unused `DioClient` wrappers) once the real implementation ships.

@@ -1,3 +1,15 @@
 ---
 alwaysApply: true
 ---
+
+# Architecture Memory
+
+Decisions from the codebase refactor (2026):
+
+- **Auth:** `AsyncNotifier` (`AuthNotifier`) replaces dead `ChangeNotifier` `AuthProvider`.
+- **API:** `UllrApiHttpClient` + domain services (`AuthApiService`, `GearApiService`, `PreferencesApiService`) behind `UllrApiService` facade.
+- **DI:** `injection_container.dart` is a barrel; providers split into `network/providers.dart`, `auth_providers.dart`, `dev_auto_login_provider.dart`.
+- **Routes:** Canonical `AppRoutes.home` is `/` (GoRouter). No duplicate route constant classes.
+- **DioClient scaffold:** Removed — features use `UllrApiService` / generated client directly.
+- **Location:** `geolocator` only; `location` package removed.
+- **Freezed:** Not used; `AuthState` is hand-rolled sealed-style class.

@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+# debugPrint Policy
+
+- No `[PERF]` timing logs in production code — use Flutter DevTools.
+- Wrap remaining `debugPrint` calls in `kDebugMode` guards.
+- Prefer structured error logging via `ErrorLogger` for failures users might see.
+- Target: fewer than **30** `debugPrint` calls across `lib/` (excluding generated code).
