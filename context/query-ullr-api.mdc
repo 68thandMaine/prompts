@@ -1,0 +1,66 @@
+---
+description: How to query the local ULLR API when discovering gear (and other) contracts for mobile work
+globs: lib/features/gear/**,lib/src/core/network/**,lib/openapi/**,scripts/codegen*.sh,scripts/curl_gear_examples.sh
+alwaysApply: false
+---
+
+# Query the local ULLR API (contract discovery)
+
+ALWAYS discover gear and other HTTP contracts from a **running** ULLR API. NEVER invent field names from memory when a live response or OpenAPI is available.
+
+## Prerequisites
+
+- API on port **3333** (see workspace `PORTS.md`)
+- Auth credentials via env only — NEVER commit tokens
+
+```bash
+export ULLR_API_BASE_URL=http://localhost:3333
+export ULLR_EMAIL=...
+export ULLR_PASSWORD=...
+```
+
+## Discovery order
+
+1. **OpenAPI** — `GET http://localhost:3333/swagger.json` (UI: `/docs`)
+2. **Authenticate** — `POST /session` with JSON `{ "email", "password" }`; use `Authorization: Bearer <token>`
+3. **Live gear reads** — prefer `GET /gear` and `GET /gear/:id` over guessing; confirm camelCase keys match fixtures
+4. **Codegen** — after OpenAPI changes: `./scripts/codegen.sh` then `cd lib/generated/api && dart pub get && dart run build_runner build --delete-conflicting-outputs`, then `flutter pub get` at app root
+
+## Canonical curl (gear)
+
+Use [`scripts/curl_gear_examples.sh`](scripts/curl_gear_examples.sh) for create/list/get/update. Manual patterns:
+
+```bash
+# Login
+TOKEN=$(curl -sS -X POST "${ULLR_API_BASE_URL}/session" \
+  -H 'Content-Type: application/json' \
+  -d "{\"email\":\"${ULLR_EMAIL}\",\"password\":\"${ULLR_PASSWORD}\"}" \
+  | python3 -c "import json,sys; print(json.load(sys.stdin)['token'])")
+
+# List / show
+curl -sS "${ULLR_API_BASE_URL}/gear" -H "Authorization: Bearer ${TOKEN}" | jq .
+curl -sS "${ULLR_API_BASE_URL}/gear/1" -H "Authorization: Bearer ${TOKEN}" | jq .
+
+# Update description (JSON)
+curl -sS -X PUT "${ULLR_API_BASE_URL}/gear/1" \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H 'Content-Type: application/json' \
+  -d '{"description":"Updated description"}' | jq .
+```
+
+## Gear contract notes (ULLR-289)
+
+- Editable by the user: `description` (also `gearType`, `brand`, `name`, `picture`, `attributes`)
+- Read-only “usefulness”: `artificialInsights.goodFor` / `notGoodFor` (plus `summary`, `whatItIs`)
+- Also parse: `artificialInsightsStatus`, `artificialInsightsError`, `artificialInsightsUpdatedAt`
+- There is **no** user-writable `usefulness` field — NEVER invent one on the client
+
+## Compliant vs non-compliant
+
+**Compliant:** Fetch swagger → login → `GET /gear/:id` → extend Dart `Gear.fromJson` from observed keys.
+
+**Non-compliant:** Hard-code snake_case (`gear_type`) in the hand-rolled parser when the live API returns camelCase; skip live verification before shipping parsers.
+
+## After codegen
+
+If regen overwrites `lib/generated/api/pubspec.yaml`, restore SDK alignment per `generated-openapi-client-path-package.mdc`.
