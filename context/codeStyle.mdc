@@ -7,7 +7,8 @@ alwaysApply: true
 - **Structure:** Feature-first under `lib/features/`; shared code in `lib/src/core/`.
 - **State:** Riverpod `AsyncNotifier` / `Notifier`; providers live with their feature.
 - **Navigation:** GoRouter only; routes in `app_routes.dart`; memoized via `appRouterProvider`.
-- **Constants:** All magic values in `lib/src/core/constants/` — never inline business strings/numbers.
+- **Constants:** Hierarchical under `lib/src/core/constants/` (`http/`, `auth/`, `api/`, `app/`, `features/`, `dev/`) — never inline business strings/numbers. Barrel: `constants.dart`.
+- **Routes:** Canonical paths live in `lib/src/core/constants/app/app_routes.dart`.
 - **Imports:** Package imports only (`package:ullr_mobile/...`); group dart → package → project.
 - **Errors:** Use `lib/src/core/errors/` and feature-local `bootstrap_exceptions.dart`.
 - **Formatting:** `dart format -l 100`; files under 300 lines when possible.
